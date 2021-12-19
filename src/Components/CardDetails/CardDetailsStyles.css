@@ -1,0 +1,67 @@
+._total {
+  text-align: center;
+  font-weight: bold;
+}
+._info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 1px;
+}
+._confirmed {
+  color: rgb(206, 54, 54);
+}
+._recovered {
+  color: yellowgreen;
+}
+._deceased {
+  color: silver;
+}
+.carousel {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+}
+.carousel._info {
+  width: 100%;
+}
+.carousel_track-container {
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel_button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  color: white;
+  cursor: pointer;
+}
+.carousel_button i {
+  width: 12px;
+}
+.carousel_button_left {
+  left: -15px;
+  padding-right: 15px;
+}
+.carousel_button_right {
+  right: -15px;
+}
+.carousel_nav {
+  display: flex;
+  justify-content: center;
+}
+.carousel_indicator {
+  border: 1px solid white;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin: 10px 20px;
+}
+.carousel_indicator.current-slide {
+  background: rgba(54, 53, 53, 0.75);
+}

@@ -1,0 +1,17 @@
+.repo {
+  width: 300px;
+  box-shadow: 0px 0px 1rem rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 1.5rem;
+  background-color: #2b2d42;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.statename {
+  font-size: 14px;
+  font-weight: 500;
+  word-wrap: break-word;
+}
