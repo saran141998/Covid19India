@@ -1,9 +1,11 @@
-.repo {
-  width: 300px;
+.card {
+  width: 275px;
   box-shadow: 0px 0px 1rem rgba(0, 0, 0, 0.3);
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 1.5rem;
-  background-color: #2b2d42;
+  background-color: var(--secondary-color);
+  align-self: normal;
+  animation: card-load 900ms;
 }
 .flex {
   display: flex;
@@ -14,4 +16,18 @@
   font-size: 14px;
   font-weight: 500;
   word-wrap: break-word;
+  text-decoration: none;
+  color: var(--text-color-primary) !important ;
+}
+
+@keyframes card-load {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

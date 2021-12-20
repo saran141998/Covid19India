@@ -3,22 +3,37 @@
   padding: 0;
   outline: none !important;
 }
+:root {
+  --primary-color: #011627;
+  --secondary-color: #20233f;
+  --text-color-primary: white;
+  --text-color-secondary: black;
+  --form-back-primary: #2b2d42;
+  --table-row-head: #20233f;
+  --cell-background: #20233f;
+}
+.white-mode {
+  --primary-color: white;
+  --secondary-color: white;
+  --text-color-primary: rgb(44, 40, 40);
+  --text-color-secondary: white;
+  --form-back-primary: #f2f2f4;
+  --table-row-head: #ebecf5;
+  --cell-background: #ebecf5;
+}
 
 body {
   width: 100vw !important;
   box-sizing: border-box;
   overflow-x: hidden;
-  margin: 0 auto !important;
-  background-color: #011627 !important;
+  margin: 0 20px !important;
+  background-color: var(--primary-color) !important;
   color: white !important;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-nav {
-  padding: 20px;
-}
+
 a {
   text-decoration: none;
-  color: white;
 }
 a:hover {
   color: #ff8000;

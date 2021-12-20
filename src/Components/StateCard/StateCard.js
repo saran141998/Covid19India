@@ -54,11 +54,11 @@ export default function StateCard({
     : data["districts"][district].delta?.deceased;
 
   return (
-    <div className="repo">
+    <div className="card">
       <div className="flex">
         <div>
-          <Link to={`/detailedview/${statekey}`}>
-            <p className="statename">{data.fullname}</p>
+          <Link className="statename" to={`/detailedview/${statekey}`}>
+            <p>{data.fullname}</p>
           </Link>
         </div>
 

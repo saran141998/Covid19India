@@ -30,56 +30,65 @@ export default function CardDetails({
           onClick={(e) => setCounter(counter - 1)}
           className="carousel_button carousel_button_left"
         >
-          <i className="fas fa-angle-left"></i>
+          <i className="fas fa-angle-left angle-icon-color"></i>
         </button>
       )}
       {counter === 0 && (
-        <>
+        <div className="total_data">
           <div className="_total">Total</div>
           <div className="_info">
-            <span className="_confirmed">
-              Confirmed: {confirmed.toLocaleString()}
-            </span>
-            <span className="_recovered">
-              Recovered: {recovered.toLocaleString()}
-            </span>
-            <span className="_deceased">
-              Deceased: {deceased.toLocaleString()}
-            </span>
+            <div className="_confirmed">
+              <span>Confirmed: </span>
+              <span>{confirmed.toLocaleString()}</span>
+            </div>
+            <div className="_recovered">
+              <span>Recovered: </span>
+              <span>{recovered.toLocaleString()}</span>
+            </div>
+            <div className="_deceased">
+              <span>Deceased: </span>
+              <span>{deceased.toLocaleString()}</span>
+            </div>
           </div>
-        </>
+        </div>
       )}
       {counter === 1 && (
-        <>
+        <div className="delta_data">
           <div className="_total">Delta</div>
           <div className="_info">
-            <span className="_confirmed">
-              Confirmed: {deltaconfirmed?.toLocaleString()}
-            </span>
-            <span className="_recovered">
-              Recovered: {deltarecovered?.toLocaleString()}
-            </span>
-            <span className="_deceased">
-              Deceased: {deltadeceased?.toLocaleString()}
-            </span>
+            <div className="_confirmed">
+              <span>Confirmed: </span>
+              <span>{deltaconfirmed.toLocaleString()}</span>
+            </div>
+            <div className="_recovered">
+              <span>Recovered: </span>
+              <span>{deltarecovered.toLocaleString()}</span>
+            </div>
+            <div className="_deceased">
+              <span>Deceased: </span>
+              <span>{deltadeceased.toLocaleString()}</span>
+            </div>
           </div>
-        </>
+        </div>
       )}
       {counter === 2 && (
-        <>
+        <div className="delta7_data">
           <div className="_total">Delta7</div>
           <div className="_info">
-            <span className="_confirmed">
-              Confirmed: {delta7confirmed?.toLocaleString()}
-            </span>
-            <span className="_recovered">
-              Recovered: {delta7recovered?.toLocaleString()}
-            </span>
-            <span className="_deceased">
-              Deceased: {delta7deceased?.toLocaleString()}
-            </span>
+            <div className="_confirmed">
+              <span>Confirmed: </span>
+              <span>{delta7confirmed?.toLocaleString()}</span>
+            </div>
+            <div className="_recovered">
+              <span>Recovered: </span>
+              <span>{delta7recovered?.toLocaleString()}</span>
+            </div>
+            <div className="_deceased">
+              <span>Deceased: </span>
+              <span>{delta7deceased?.toLocaleString()}</span>
+            </div>
           </div>
-        </>
+        </div>
       )}
 
       {counter !== 2 && (
@@ -87,7 +96,7 @@ export default function CardDetails({
           onClick={(e) => setCounter(counter + 1)}
           className="carousel_button carousel_button_right"
         >
-          <i className="fas fa-angle-right"></i>
+          <i className="fas fa-angle-right angle-icon-color"></i>
         </button>
       )}
       <div className="carousel_nav">

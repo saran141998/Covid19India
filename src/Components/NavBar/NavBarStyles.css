@@ -1,0 +1,15 @@
+.nav-bar {
+  position: sticky;
+  margin: 10px 10px;
+  top: 10px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+.pointer {
+  cursor: pointer;
+  color: var(--text-color-primary) !important ;
+}
+.link-color {
+  color: var(--text-color-primary) !important;
+}

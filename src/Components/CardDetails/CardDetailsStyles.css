@@ -1,6 +1,7 @@
 ._total {
   text-align: center;
   font-weight: bold;
+  color: var(--text-color-primary);
 }
 ._info {
   display: flex;
@@ -9,13 +10,25 @@
   padding: 1px;
 }
 ._confirmed {
-  color: rgb(206, 54, 54);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fb5870;
 }
 ._recovered {
-  color: yellowgreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: rgb(32, 221, 64);
 }
 ._deceased {
-  color: silver;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: rgb(182, 247, 3);
 }
 .carousel {
   position: relative;
@@ -53,15 +66,54 @@
 .carousel_nav {
   display: flex;
   justify-content: center;
+  margin-top: 10px;
 }
 .carousel_indicator {
-  border: 1px solid white;
+  border: 1px solid var(--text-color-primary);
   cursor: pointer;
   border-radius: 50%;
   width: 10px;
   height: 10px;
-  margin: 10px 20px;
+  margin: 0 10px;
+  margin-top: 20px;
+  background: var(--text-color-secondary);
 }
 .carousel_indicator.current-slide {
-  background: rgba(54, 53, 53, 0.75);
+  background: var(--text-color-primary);
+}
+.delta_data {
+  animation: delta-load 200ms ease-in;
+}
+@keyframes delta-load {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.total_data {
+  animation: total-load 200ms ease-in;
+}
+@keyframes total-load {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.delta7_data {
+  animation: delta7-load 200ms ease-in;
+}
+@keyframes delta7-load {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.angle-icon-color {
+  color: var(--text-color-primary);
 }

@@ -3,6 +3,7 @@ import "./Home.css";
 import StateCard from "../StateCard/StateCard";
 import axios from "axios";
 import { STATE_NAMES } from "../../Constants";
+import LoadingComponent from "../LoadingComponent/LoadingComponent";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -32,13 +33,17 @@ export default function Home() {
     data[key].fullname.toLowerCase().includes(searchfield.toLowerCase())
   );
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="laoding">
+        <LoadingComponent />
+      </div>
+    );
   }
   return (
     <>
       <div className="form-group">
         <div className="searchbox">
-          <i className="fas fa-search"></i>
+          <i className="fas fa-search search-icon"></i>
           <input
             type="search"
             placeholder="Enter State name"

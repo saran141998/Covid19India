@@ -4,11 +4,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import DetailsTable from "../DetailsTable/DetailsTable";
+import LoadingComponent from "../LoadingComponent/LoadingComponent";
 
 export default function StateDetail() {
   const [data, setData] = useState([]);
   const [date, setDate] = useState("");
-
   const [loading, setLoading] = useState(true);
   const { key } = useParams();
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function StateDetail() {
       });
   }, []);
   if (loading) {
-    return <div>Laoding...</div>;
+    return <LoadingComponent />;
   }
 
   return (
