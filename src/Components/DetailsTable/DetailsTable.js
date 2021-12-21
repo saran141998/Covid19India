@@ -4,7 +4,9 @@ import { TABLE_COLUMNS, STATE_NAMES } from "../../Constants";
 
 export default function DetailsTable({ selectedDate, statekey, data }) {
   const [sortAsc, setSortAsc] = useState(true);
+
   const keys = selectedDate ? [selectedDate] : Object.keys(data);
+  console.log(Object.keys(data).length);
   function sortTable(table, column, asc = true) {
     setSortAsc(asc);
     const dirModifier = asc ? 1 : -1;
@@ -53,14 +55,14 @@ export default function DetailsTable({ selectedDate, statekey, data }) {
                           onClick={() =>
                             sortTable(document.querySelector("table"), i, true)
                           }
-                          class="fas fa-sort-amount-up-alt pointer"
+                          className="fas fa-sort-amount-up-alt pointer"
                         ></i>
                       ) : (
                         <i
                           onClick={() =>
                             sortTable(document.querySelector("table"), i, false)
                           }
-                          class="fas fa-sort-amount-down-alt pointer"
+                          className="fas fa-sort-amount-down-alt pointer"
                         ></i>
                       )}
                     </span>
@@ -73,16 +75,18 @@ export default function DetailsTable({ selectedDate, statekey, data }) {
         <tbody className="tbody">
           {keys.map((d, i) => (
             <tr className="trbody" key={i}>
-              <td className="td">{d}</td>
-              <td className="td">
+              <td data-label="Date" className="td">
+                {d}
+              </td>
+              <td data-label="Confirmed" className="td">
                 {data[d].total?.confirmed
                   ? data[d].total?.confirmed.toLocaleString()
                   : 0}
               </td>
-              <td className="td">
+              <td data-label="Recovered" className="td">
                 {data[d].total?.recovered ? data[d].total?.recovered : 0}
               </td>
-              <td className="td">
+              <td data-label="Deceased" className="td">
                 {data[d].total?.deceased ? data[d].total?.deceased : 0}
               </td>
               <td className="td">

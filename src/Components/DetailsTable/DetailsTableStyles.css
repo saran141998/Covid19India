@@ -70,3 +70,38 @@ caption {
   gap: 1rem;
   margin-right: 10px !important;
 }
+/* @media (max-width: 550px) {
+  table thead {
+    display: none;
+  }
+  table tbody {
+    padding: 0 16px;
+  }
+  table tbody,
+  table tbody tr {
+    display: block;
+    width: 100%;
+  }
+  table tbody tr th::before,
+  table tbody tr td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 10px;
+  }
+  table tbody tr td,
+  table tbody tr th {
+    display: block;
+    width: 50%;
+    float: left;
+    font-size: 12px;
+  }
+  table tbody tr {
+    margin-bottom: 16px;
+    float: left;
+    clear: both;
+  }
+  table tbody tr td :last-child {
+    display: none;
+    background: var(--primary-color);
+  }
+} */

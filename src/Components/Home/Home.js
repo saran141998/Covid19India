@@ -41,6 +41,11 @@ export default function Home() {
   }
   return (
     <>
+      <div className="message">
+        <p>
+          <span> </span>
+        </p>
+      </div>
       <div className="form-group">
         <div className="searchbox">
           <i className="fas fa-search search-icon"></i>

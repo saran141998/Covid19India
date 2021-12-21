@@ -1,6 +1,5 @@
 .grid-container {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 29px;
   max-width: 90em;
   padding: 8px 8px;
   align-items: center;
@@ -65,6 +64,15 @@
 .searchbox ::placeholder {
   color: var(--text-color-primary);
 }
+.message > p > span::before {
+  animation: animate-message infinite 7s;
+  content: "";
+}
+.message {
+  display: flex;
+  justify-content: center;
+}
+
 @keyframes form-load {
   0% {
     transform: translateY(-100%);
@@ -79,6 +87,10 @@
   }
   .grid-container {
     margin-right: 0;
-    margin-left: -30px;
+    margin-left: 5px;
+  }
+  .searchbox {
+    margin-right: 0;
+    margin-left: 5px;
   }
 }

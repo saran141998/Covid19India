@@ -82,7 +82,7 @@ export default function StateCard({
           delta7deceased={delta7deceased ? delta7deceased : 0}
         />
       ) : (
-        "Not found"
+        <span>Not found</span>
       )}
     </div>
   );

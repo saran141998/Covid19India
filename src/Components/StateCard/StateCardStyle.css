@@ -19,6 +19,13 @@
   text-decoration: none;
   color: var(--text-color-primary) !important ;
 }
+.card > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  color: var(--text-color-primary);
+}
 
 @keyframes card-load {
   0% {
