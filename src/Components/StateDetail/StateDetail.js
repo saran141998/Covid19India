@@ -33,6 +33,7 @@ export default function StateDetail() {
           onChange={(e) => setDate(e.target.value)}
         />
       </div>
+
       <div className="table-container">
         <DetailsTable
           selectedDate={date}

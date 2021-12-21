@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import "./DetailsTableStyles.css";
 import { TABLE_COLUMNS, STATE_NAMES } from "../../Constants";
+import Pagination from "../Pagination/Pagination";
 
 export default function DetailsTable({ selectedDate, statekey, data }) {
   const [sortAsc, setSortAsc] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(60);
+  let indexOfLastPage = currentPage * postPerPage;
+  let indexOfFirstPage = indexOfLastPage - postPerPage;
 
-  const keys = selectedDate ? [selectedDate] : Object.keys(data);
-  console.log(Object.keys(data).length);
+  if (currentPage === 599) {
+    indexOfLastPage = 599;
+    indexOfFirstPage = 0;
+  }
+  const keys = selectedDate
+    ? [selectedDate]
+    : Object.keys(data).slice(indexOfFirstPage, indexOfLastPage);
+
   function sortTable(table, column, asc = true) {
     setSortAsc(asc);
     const dirModifier = asc ? 1 : -1;
@@ -37,9 +48,19 @@ export default function DetailsTable({ selectedDate, statekey, data }) {
       .querySelector(`th:nth-child(${column + 1})`)
       .classList.toggle("th-sort-desc", !asc);
   }
+  const paginate = (number) => setCurrentPage(number);
 
   return (
     <div>
+      {!selectedDate && (
+        <Pagination
+          totalRecords={599}
+          postsPerpage={postPerPage}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+      )}
+
       <table className="table">
         <caption>{STATE_NAMES[statekey]}</caption>
         <thead className="thead">

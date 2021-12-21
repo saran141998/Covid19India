@@ -13,6 +13,7 @@
   --table-row-head: #20233f;
   --cell-background: #20233f;
   --navbar-color: #0b2235;
+  --pagination-btn-color: var(--secondary-color);
 }
 .white-mode {
   --primary-color: white;
@@ -23,6 +24,7 @@
   --table-row-head: #ebecf5;
   --cell-background: #ebecf5;
   --navbar-color: #ebecf5;
+  --pagination-btn-color: #ebecf5;
 }
 
 body {

@@ -1,0 +1,26 @@
+.pagination-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  margin-right: 5px;
+  cursor: pointer;
+  color: var(--text-color-primary);
+  background-color: var(--pagination-btn-color);
+}
+.pagination-wrapper > button:hover {
+  transform: scale(1.1);
+  transition: all 0.2s linear;
+  background-color: orangered;
+  color: white;
+}
+.highlight {
+  background-color: orangered;
+  color: white;
+}
