@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NavBarStyles.css";
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
+  const [switchTheme, setSwitchTheme] = useState(true);
   const toggleTheme = () => {
-    console.log("click");
     document.body.classList.toggle("white-mode");
+    setSwitchTheme(false);
+  };
+  const switchWhite = () => {
+    document.body.classList.toggle("white-mode");
+    setSwitchTheme(true);
   };
   return (
     <header className="nav-bar">
@@ -18,7 +23,11 @@ export default function NavBar() {
         </div>
 
         <div>
-          <i onClick={toggleTheme} className="fas fa-sun pointer"></i>
+          {switchTheme ? (
+            <i onClick={toggleTheme} className="fas fa-sun pointer"></i>
+          ) : (
+            <i onClick={switchWhite} className="fas fa-moon pointer"></i>
+          )}
         </div>
       </div>
     </header>

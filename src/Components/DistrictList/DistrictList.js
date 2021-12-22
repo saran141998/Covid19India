@@ -3,7 +3,7 @@ import "./DistrictList.css";
 
 export default function DistrictList({ districts, onDistrictChange }) {
   return (
-    <div>
+    <div className="custom-scroller">
       <select
         name="districts"
         id="districts"

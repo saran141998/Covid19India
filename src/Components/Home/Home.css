@@ -40,7 +40,7 @@
   width: 300px;
   height: 20px;
   background-color: var(--form-back-primary);
-  border-radius: 30px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   padding: 10px;
@@ -54,7 +54,18 @@
   flex: 1;
   color: var(--text-color-primary);
   background-color: var(--form-back-primary);
-  border-radius: 30px;
+  border-radius: 10px;
+  padding-left: 10px;
+  height: 40px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+.searchbox > select {
+  flex: 1;
+  color: var(--text-color-primary);
+  background-color: var(--form-back-primary);
+  border-radius: 10px;
   padding-left: 10px;
   height: 40px;
   border: none;
@@ -63,16 +74,27 @@
 }
 .searchbox ::placeholder {
   color: var(--text-color-primary);
+  opacity: 0.2;
 }
-.message > p > span::before {
-  animation: animate-message infinite 7s;
-  content: "";
+.searchbox::-webkit-search-decoration {
+  display: none;
 }
-.message {
-  display: flex;
-  justify-content: center;
+.searchbox > input[type="date"]::placeholder {
+  opacity: 0.2;
+}
+::-webkit-datetime-edit {
+  color: var(--text-color-primary);
+  opacity: 0.2;
 }
 
+:focus::-webkit-datetime-edit {
+  color: var(--text-color-primary);
+  opacity: 0.2;
+}
+::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+  cursor: pointer;
+}
 @keyframes form-load {
   0% {
     transform: translateY(-100%);

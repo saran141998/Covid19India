@@ -11,6 +11,7 @@ export default function Home() {
   const [timeSeriesData, settimeSeriesData] = useState([]);
   const [searchfield, setSearchfield] = useState("");
   const [dateChoosed, setDate] = useState("");
+  const [sortOption, setSortOption] = useState("");
   useEffect(() => {
     axios
       .get("https://data.covid19india.org/v4/min/data.min.json")
@@ -29,9 +30,19 @@ export default function Home() {
   Object.keys(data).forEach((key) => {
     data[key].fullname = STATE_NAMES[key];
   });
-  const filteredState = statekeys.filter((key) =>
+  let filteredState = statekeys.filter((key) =>
     data[key].fullname.toLowerCase().includes(searchfield.toLowerCase())
   );
+  if (sortOption === "Sort by Confirmed Asc") {
+    filteredState = Object.keys(data).sort((a, b) => {
+      return data[a].total?.confirmed - data[b].total?.confirmed;
+    });
+  }
+  if (sortOption === "Sort by Confirmed Desc") {
+    filteredState = Object.keys(data).sort((a, b) => {
+      return data[b].total?.confirmed - data[a].total?.confirmed;
+    });
+  }
   if (loading) {
     return (
       <div className="laoding">
@@ -59,8 +70,22 @@ export default function Home() {
           <input
             type="date"
             min="2020-11-01"
+            max="2021-09-30"
             onChange={(e) => setDate(e.target.value)}
           />
+        </div>
+        <div className="searchbox">
+          <select
+            name="districts"
+            id="districts"
+            onChange={(e) => setSortOption(e.target.value)}
+          >
+            <option value="Select an Option">Select an Option</option>
+            <option value="Sort by Confirmed Asc">Sort by Confirmed Asc</option>
+            <option value="Sort by Confirmed Desc">
+              Sort by Confirmed Desc
+            </option>
+          </select>
         </div>
       </div>
       <div className="grid-container">

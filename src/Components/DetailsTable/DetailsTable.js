@@ -1,58 +1,126 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./DetailsTableStyles.css";
-import { TABLE_COLUMNS, STATE_NAMES } from "../../Constants";
+import { STATE_NAMES } from "../../Constants";
 import Pagination from "../Pagination/Pagination";
 
-export default function DetailsTable({ selectedDate, statekey, data }) {
-  const [sortAsc, setSortAsc] = useState(true);
+export default function DetailsTable({ statekey, data }) {
+  const [sortDate, setSortDate] = useState();
+  const [dateChoosen, setDateChoosen] = useState();
+  const [sortConfirmed, setSortConfirmed] = useState("");
+  const [sortRecovered, setSortRecovered] = useState("");
+  const [sortDeceased, setSortDeceased] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [keys, setkeys] = useState([]);
   const [postPerPage] = useState(60);
   let indexOfLastPage = currentPage * postPerPage;
   let indexOfFirstPage = indexOfLastPage - postPerPage;
-
   if (currentPage === 599) {
     indexOfLastPage = 599;
     indexOfFirstPage = 0;
   }
-  const keys = selectedDate
-    ? [selectedDate]
-    : Object.keys(data).slice(indexOfFirstPage, indexOfLastPage);
+  useEffect(() => {
+    setkeys(
+      dateChoosen
+        ? [dateChoosen]
+        : Object.keys(data).slice(indexOfFirstPage, indexOfLastPage)
+    );
+  }, [currentPage, dateChoosen]);
 
-  function sortTable(table, column, asc = true) {
-    setSortAsc(asc);
-    const dirModifier = asc ? 1 : -1;
-    const tBody = table.tBodies[0];
-    const rows = Array.from(tBody.querySelectorAll("tr"));
-    const sortedRows = rows.sort((a, b) => {
-      const aColText = a
-        .querySelector(`td:nth-child(${column + 1})`)
-        .textContent.trim();
-      const bColText = b
-        .querySelector(`td:nth-child(${column + 1})`)
-        .textContent.trim();
-      let ascending = 1 * dirModifier;
-      let descending = -1 * dirModifier;
-      return aColText > bColText ? ascending : descending;
-    });
-    while (tBody.firstChild) {
-      tBody.removeChild(tBody.firstChild);
-    }
-    tBody.append(...sortedRows);
-    table
-      .querySelectorAll("th")
-      .forEach((th) => th.classList.remove("th-sort-asc", "th-sort-desc"));
-    table
-      .querySelector(`th:nth-child(${column + 1})`)
-      .classList.toggle("th-sort-asc", asc);
-    table
-      .querySelector(`th:nth-child(${column + 1})`)
-      .classList.toggle("th-sort-desc", !asc);
-  }
+  const handleSortDateAsc = () => {
+    setSortDate(true);
+    setkeys(
+      Object.keys(data)
+        .slice(indexOfFirstPage, indexOfLastPage)
+        .sort((a, b) => {
+          return 1;
+        })
+    );
+  };
+  const handleSortDateDesc = () => {
+    setSortDate(false);
+    setkeys(
+      Object.keys(data)
+        .slice(indexOfFirstPage, indexOfLastPage)
+        .sort((a, b) => {
+          return -1;
+        })
+    );
+  };
+
+  const handleSortConfirmedAsc = () => {
+    setSortConfirmed(true);
+    setkeys(
+      Object.keys(data)
+        .slice(indexOfFirstPage, indexOfLastPage)
+        .sort((a, b) => {
+          return data[a].total?.confirmed - data[b].total?.confirmed;
+        })
+    );
+  };
+  const handleSortConfirmedDesc = () => {
+    setSortConfirmed(false);
+    setkeys(
+      Object.keys(data)
+        .slice(indexOfFirstPage, indexOfLastPage)
+        .sort((a, b) => {
+          return data[b].total?.confirmed - data[a].total?.confirmed;
+        })
+    );
+  };
+  const handleSortRecoveredAsc = () => {
+    setSortRecovered(true);
+    setkeys(
+      Object.keys(data)
+        .slice(indexOfFirstPage, indexOfLastPage)
+        .sort((a, b) => {
+          return data[a].total?.recovered - data[b].total?.recovered;
+        })
+    );
+  };
+  const handleSortRecoveredDesc = () => {
+    setSortRecovered(false);
+    setkeys(
+      Object.keys(data)
+        .slice(indexOfFirstPage, indexOfLastPage)
+        .sort((a, b) => {
+          return data[b].total?.recovered - data[a].total?.recovered;
+        })
+    );
+  };
+  const handleSortDeceasedAsc = () => {
+    setSortDeceased(true);
+    setkeys(
+      Object.keys(data)
+        .slice(indexOfFirstPage, indexOfLastPage)
+        .sort((a, b) => {
+          return data[a].total?.deceased - data[b].total?.deceased;
+        })
+    );
+  };
+  const handleSortDeceasedDesc = () => {
+    setSortDeceased(false);
+    setkeys(
+      Object.keys(data)
+        .slice(indexOfFirstPage, indexOfLastPage)
+        .sort((a, b) => {
+          return data[b].total?.deceased - data[a].total?.deceased;
+        })
+    );
+  };
+
   const paginate = (number) => setCurrentPage(number);
 
   return (
     <div>
-      {!selectedDate && (
+      <div className="form-group">
+        <input
+          type="date"
+          min="2020-11-01"
+          max="2021-09-30"
+          onChange={(e) => setDateChoosen(e.target.value)}
+        />
+      </div>
+      {!dateChoosen && (
         <Pagination
           totalRecords={599}
           postsPerpage={postPerPage}
@@ -65,32 +133,88 @@ export default function DetailsTable({ selectedDate, statekey, data }) {
         <caption>{STATE_NAMES[statekey]}</caption>
         <thead className="thead">
           <tr className="trhead">
-            {TABLE_COLUMNS.map((columnName, i) => (
-              <th className="th" key={i}>
-                <div className="sort_wrap ">
-                  <span>{columnName}</span>
-                  {i !== 4 && i !== 5 && (
-                    <span>
-                      {!sortAsc ? (
-                        <i
-                          onClick={() =>
-                            sortTable(document.querySelector("table"), i, true)
-                          }
-                          className="fas fa-sort-amount-up-alt pointer"
-                        ></i>
-                      ) : (
-                        <i
-                          onClick={() =>
-                            sortTable(document.querySelector("table"), i, false)
-                          }
-                          className="fas fa-sort-amount-down-alt pointer"
-                        ></i>
-                      )}
-                    </span>
+            <th className="th">
+              <div className="sort_wrap ">
+                <span>Date</span>
+                <span>
+                  {!sortDate ? (
+                    <i
+                      onClick={handleSortDateAsc}
+                      className="fas fa-sort-amount-up-alt pointer"
+                    ></i>
+                  ) : (
+                    <i
+                      onClick={handleSortDateDesc}
+                      className="fas fa-sort-amount-down-alt pointer"
+                    ></i>
                   )}
-                </div>
-              </th>
-            ))}
+                </span>
+              </div>
+            </th>
+            <th className="th">
+              <div className="sort_wrap ">
+                <span>Confirmed</span>
+                <span>
+                  {!sortConfirmed ? (
+                    <i
+                      onClick={handleSortConfirmedAsc}
+                      className="fas fa-sort-amount-up-alt pointer"
+                    ></i>
+                  ) : (
+                    <i
+                      onClick={handleSortConfirmedDesc}
+                      className="fas fa-sort-amount-down-alt pointer"
+                    ></i>
+                  )}
+                </span>
+              </div>
+            </th>
+            <th className="th">
+              <div className="sort_wrap ">
+                <span>Recovered</span>
+                <span>
+                  {!sortRecovered ? (
+                    <i
+                      onClick={handleSortRecoveredAsc}
+                      className="fas fa-sort-amount-up-alt pointer"
+                    ></i>
+                  ) : (
+                    <i
+                      onClick={handleSortRecoveredDesc}
+                      className="fas fa-sort-amount-down-alt pointer"
+                    ></i>
+                  )}
+                </span>
+              </div>
+            </th>
+            <th className="th">
+              <div className="sort_wrap ">
+                <span>Deceased</span>
+                <span>
+                  {!sortDeceased ? (
+                    <i
+                      onClick={handleSortDeceasedAsc}
+                      className="fas fa-sort-amount-up-alt pointer"
+                    ></i>
+                  ) : (
+                    <i
+                      onClick={handleSortDeceasedDesc}
+                      className="fas fa-sort-amount-down-alt pointer"
+                    ></i>
+                  )}
+                </span>
+              </div>
+            </th>
+            <th className="th">
+              <div className="sort_wrap ">
+                <span>Delta</span>
+              </div>
+            </th>
+            <th className="th">
+              <div className="sort_wrap ">
+                <span>Delta7</span>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody className="tbody">

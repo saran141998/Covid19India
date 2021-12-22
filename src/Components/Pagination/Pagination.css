@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 10px;
 }
 .btn {
   width: 40px;
@@ -13,7 +14,10 @@
   cursor: pointer;
   color: var(--text-color-primary);
   background-color: var(--pagination-btn-color);
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }
+
 .pagination-wrapper > button:hover {
   transform: scale(1.1);
   transition: all 0.2s linear;
